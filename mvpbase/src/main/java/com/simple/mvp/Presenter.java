@@ -3,8 +3,11 @@ package com.simple.mvp;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
@@ -22,12 +25,16 @@ import java.lang.reflect.Type;
  *
  * <p>
  * 当 View 对象销毁时如果用户再调用 View对象, 那么则会
- * 通过动态代理创建一个View对象 {@link #mNullView}, 这样保证 view对象不会为空.
+ * 通过动态代理创建一个View对象 {@link #mNullViewProxy}, 这样保证 view对象不会为空.
  * </p>
  *
  * Created by mrsimple on 23/12/16.
  */
 public abstract class Presenter<T extends MvpView> {
+    /**
+     * Null Mvp View InvocationHandler
+     */
+    private static final InvocationHandler NULL_VIEW = new MvpViewInvocationHandler();
     /**
      * application context
      */
@@ -47,7 +54,7 @@ public abstract class Presenter<T extends MvpView> {
     /**
      * Mvp View created by dynamic Proxy
      */
-    private T mNullView;
+    private T mNullViewProxy;
     /**
      * init application context with reflection.
      */
@@ -140,6 +147,12 @@ public abstract class Presenter<T extends MvpView> {
         return context;
     }
 
+
+    protected String getString(int rid) {
+        return getContext().getString(rid);
+    }
+
+
     /**
      * activity 是否是finishing状态
      *
@@ -166,27 +179,46 @@ public abstract class Presenter<T extends MvpView> {
         T view = mViewRef != null ? mViewRef.get() : null;
         if (view == null) {
             // create null mvp view
-            if (mNullView == null) {
-                mNullView = (T) Proxy.newProxyInstance(getClass().getClassLoader(),
-                        new Class[]{getMvpViewClass()}, new MvpViewInvocationHandler());
+            if (mNullViewProxy == null) {
+                mNullViewProxy = createView(getMvpViewClass());
             }
-            view = mNullView;
+            view = mNullViewProxy;
         }
         return view;
     }
 
 
-    private Class getMvpViewClass() {
+    /**
+     * 创建 mvp view
+     * @param viewClz
+     * @param <T>
+     * @return
+     */
+    public static <T> T createView(Class<T> viewClz) {
+        return (T) Proxy.newProxyInstance(viewClz.getClassLoader(),
+                new Class[] { viewClz }, NULL_VIEW);
+    }
+
+
+    private Class<T> getMvpViewClass() {
         if (mMvpViewClass == null) {
             Type genType = getClass().getGenericSuperclass();
             Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-            mMvpViewClass = (Class) params[0];
+            mMvpViewClass = (Class<T>) params[0];
         }
         return mMvpViewClass;
     }
 
 
-    protected String getString(int rid) {
-        return getContext().getString(rid);
+    /**
+     * 动态代理 InvocationHandler
+     */
+    private static class MvpViewInvocationHandler implements InvocationHandler {
+
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            Log.e("", "### MvpView InvocationHandler do nothing -> " + method.getName()) ;
+            return null;
+        }
     }
 }
