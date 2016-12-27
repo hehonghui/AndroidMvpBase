@@ -12,6 +12,8 @@ import java.lang.reflect.Type;
 /**
  * Mvp Presenter 抽象类. 通过 弱引用持有 Context 和 View对象, 避免产生内存泄露。
  *
+ * 注意, 如果Presenter有多个泛型类,那么 MvpView类型的泛型类要放在第一位.
+ *
  * <p>
  * 当 Context (通常是指Activity)被销毁时如果客户端程序
  * 再调用Context, 那么直接返回 Application 的Context. 因此如果用户需要调用与Activity相关的UI操作(例如弹出Dialog)时,
@@ -92,11 +94,19 @@ public abstract class Presenter<T extends MvpView> {
         }
     }
 
+
     /**
      * release resource
      */
     public void detach() {
-
+        if ( mContextRef != null ) {
+            mContextRef.clear();
+        }
+        mContextRef = null;
+        if ( mViewRef != null ) {
+            mViewRef.clear();
+        }
+        mViewRef = null;
     }
 
     /**
@@ -108,12 +118,17 @@ public abstract class Presenter<T extends MvpView> {
      * @return
      */
     protected boolean isActivityAlive() {
-        return !isActivityFinishing();
+        return !isActivityFinishing() && mViewRef.get() != null;
     }
 
 
     /**
-     * 返回 Context. 如果 Activity被销毁, 那么返回应用的Context
+     * 返回 Context. 如果 Activity被销毁, 那么返回应用的Context.
+     *
+     * 注意:
+     *     通过过Context进行UI方面的操作时应该调用 {@link #isActivityAlive()}
+     * 判断Activity是否还已经被销毁, 在Activity未销毁的状态下才能操作. 否则会引发crash.
+     * 而获取资源等操作则可以使用应用的Context.
      *
      * @return
      */
@@ -139,17 +154,21 @@ public abstract class Presenter<T extends MvpView> {
             Activity hostActivity = (Activity) context;
             return hostActivity.isFinishing();
         }
-        return false;
+        return true;
     }
 
-
+    /**
+     * 返回 Mvp View对象. 如果真实的 View对象已经被销毁, 那么会通过动态代理构建一个View,
+     * 确保调用 View对象执行操作时不会crash.
+     * @return Mvp View
+     */
     protected T getMvpView() {
         T view = mViewRef != null ? mViewRef.get() : null;
         if (view == null) {
             // create null mvp view
             if (mNullView == null) {
-                mNullView = (T) Proxy.newProxyInstance(getClass().getClassLoader(), new Class[]{getMvpViewClass()},
-                        new MvpViewInvocationHandler());
+                mNullView = (T) Proxy.newProxyInstance(getClass().getClassLoader(),
+                        new Class[]{getMvpViewClass()}, new MvpViewInvocationHandler());
             }
             view = mNullView;
         }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MvpBase</string>
+
+    <string name="fetched_news_detail">获取到新闻详情 -- 1</string>
+    <string name="fetched_news_comments">获取到评论 -- 2</string>
+    <string name="go_to_detail">进入详情页面</string>
+    <string name="fetch_comments_in_detail">获取评论</string>
 </resources>

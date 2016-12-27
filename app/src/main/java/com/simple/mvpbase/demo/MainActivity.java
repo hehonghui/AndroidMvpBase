@@ -1,27 +1,25 @@
 package com.simple.mvpbase.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+import com.simple.mvpbase.demo.detail.DetailActivity;
 
-    MainPresenter mPresenter = new MainPresenter();
+public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        mPresenter.attach(this, this);
-        mPresenter.fetchNews();
-    }
-
-    @Override
-    public void showNews() {
-
+        findViewById(R.id.jump_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DetailActivity.class));
+            }
+        });
     }
 }
