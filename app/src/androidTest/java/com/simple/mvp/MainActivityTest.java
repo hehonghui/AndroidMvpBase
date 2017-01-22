@@ -5,8 +5,10 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.simple.mvpbase.demo.MainActivity;
+import com.simple.mvpbase.demo.R;
 
 import org.hamcrest.Matcher;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -21,6 +23,7 @@ import static java.lang.Thread.sleep;
  */
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
+    @Rule
     public ActivityTestRule<MainActivity> mRule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
     @Test
@@ -29,8 +32,8 @@ public class MainActivityTest {
         onView(toolbarMatcher).check(matches(isDisplayed()));
 
         sleep(3 * 1000);
-
         // 下载按钮
         onView(withId(R.id.jump_button)).perform(ViewActions.click());
+        sleep(1 * 1000);
     }
 }
