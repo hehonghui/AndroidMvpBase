@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.simple.mvp.Presenter;
+import com.simple.mvpbase.demo.ModelFactory;
 import com.simple.mvpbase.demo.R;
 
 /**
@@ -14,14 +15,16 @@ public class DetailPresenter extends Presenter<DetailView> {
 
     private Handler mHandler = new Handler(Looper.getMainLooper()) ;
 
+    DetailModel mModel = ModelFactory.createDetailModel();
+
 
     public void fetchNewsDetail() {
-        mHandler.postDelayed(new Runnable() {
+        mModel.fetchDetail(new DetailListener() {
             @Override
-            public void run() {
+            public void onFetched() {
                 onFetchDetail();
             }
-        }, 3000);
+        });
     }
 
 

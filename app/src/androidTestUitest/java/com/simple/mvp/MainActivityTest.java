@@ -32,8 +32,7 @@ public class MainActivityTest {
         onView(toolbarMatcher).check(matches(isDisplayed()));
 
         sleep(3 * 1000);
-        // 下载按钮
         onView(withId(R.id.jump_button)).perform(ViewActions.click());
-        sleep(1 * 1000);
+        sleep(2 * 1000);
     }
 }
