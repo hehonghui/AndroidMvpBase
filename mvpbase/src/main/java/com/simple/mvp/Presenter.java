@@ -145,12 +145,8 @@ public abstract class Presenter<T extends MvpView> {
     }
 
 
-    protected String getString(int rid) {
-        Context context = getContext();
-        if (context != null) {
-            return context.getString(rid);
-        }
-        return "";
+    protected Context getRealContext() {
+        return mContextRef != null ? mContextRef.get() : null;
     }
 
 
@@ -171,4 +167,18 @@ public abstract class Presenter<T extends MvpView> {
         }
         return view;
     }
+
+
+    protected T getRealView() {
+        return mViewRef != null ? mViewRef.get() : null;
+    }
+
+    protected String getString(int rid) {
+        Context context = getContext();
+        if (context != null) {
+            return context.getString(rid);
+        }
+        return "";
+    }
+
 }

@@ -53,6 +53,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/mvpbase/src/androidTest/java/com/simple/mvp/mock/View2.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/mvpbase/src/main/AndroidManifest.xml">
           <value>
             <set />
