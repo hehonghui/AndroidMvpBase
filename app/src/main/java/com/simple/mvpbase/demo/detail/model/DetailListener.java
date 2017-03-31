@@ -1,4 +1,4 @@
-package com.simple.mvpbase.demo.detail;
+package com.simple.mvpbase.demo.detail.model;
 
 /**
  * Created by mrsimple on 13/2/17.

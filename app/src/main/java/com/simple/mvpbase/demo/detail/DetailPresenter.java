@@ -7,6 +7,8 @@ import android.os.Looper;
 import com.simple.mvp.Presenter;
 import com.simple.mvpbase.demo.ModelFactory;
 import com.simple.mvpbase.demo.R;
+import com.simple.mvpbase.demo.detail.model.DetailListener;
+import com.simple.mvpbase.demo.detail.model.DetailModel;
 
 /**
  * Created by mrsimple on 27/12/16.
@@ -30,11 +32,11 @@ public class DetailPresenter extends Presenter<DetailView> {
 
     private void onFetchDetail() {
         // todo: 判断Activity是否已经销毁, 避免crash.
-        if ( isActivityAlive() ) {
+        if ( isAttached() ) {
             showInfoDialog(R.string.fetched_news_detail);
         }
         // 操作View则不需要 isActivityAlive 判断, 动态代理会构建一个空实现.
-        getMvpView().showNewsDetail();
+        getView().showNewsDetail();
     }
 
     public void fetchCommentsNoCheck() {
@@ -44,7 +46,7 @@ public class DetailPresenter extends Presenter<DetailView> {
                 // todo : 弹出dialog, 如果页面退出后才执行则会crash
                 showInfoDialog(R.string.fetched_news_comments);
                 // 操作View
-                getMvpView().showComments();
+                getView().showComments();
             }
         }, 2000);
     }

@@ -31,7 +31,7 @@ public class PresenterSimpleTest {
     public void testNullView() throws Exception {
         MockPresenter presenter = new MockPresenter() ;
         // 没有attach View 时默认返回动态代理创建的View
-        assertNotNull(presenter.getMvpView());
+        assertNotNull(presenter.getView());
     }
 
 

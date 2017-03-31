@@ -1,7 +1,7 @@
 package com.simple.mvpbase.demo;
 
-import com.simple.mvpbase.demo.detail.DetailModel;
-import com.simple.mvpbase.demo.detail.DetailModelImpl;
+import com.simple.mvpbase.demo.detail.model.DetailModel;
+import com.simple.mvpbase.demo.detail.model.DetailModelImpl;
 
 /**
  * Created by mrsimple on 13/2/17.

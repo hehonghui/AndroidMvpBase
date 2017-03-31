@@ -1,4 +1,4 @@
-package com.simple.mvpbase.demo.detail;
+package com.simple.mvpbase.demo.detail.model;
 
 import android.os.Handler;
 import android.os.Looper;
