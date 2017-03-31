@@ -28,3 +28,17 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
 }
+
+
+task clearJar(type: Delete) {
+    delete 'build/libs/simple_mvpbase.jar'
+}
+
+task makeJar(type: Copy, group:'build') {
+    from('build/intermediates/bundles/release/')
+    into('build/libs/')
+    include('classes.jar')
+    rename ('classes.jar', 'simple_mvpbase.jar')
+}
+
+makeJar.dependsOn(clearJar, build)

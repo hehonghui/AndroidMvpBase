@@ -59,14 +59,14 @@ public class PresenterSimpleTest {
         presenter.attach(InstrumentationRegistry.getContext(), new TestMockView());
 
         // application context , so it's not alive
-        assertFalse( presenter.isActivityAlive() );
+        assertFalse( presenter.isAttached() );
     }
 
     @Test
     public void testLifeCycleWithNoAttach() throws Exception {
         MockPresenter presenter = new MockPresenter() ;
         // application context , so it's not alive
-        assertFalse( presenter.isActivityAlive() );
+        assertFalse( presenter.isAttached() );
     }
 
     /**
