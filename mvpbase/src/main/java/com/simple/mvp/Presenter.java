@@ -114,6 +114,19 @@ public abstract class Presenter<T extends MvpView> {
 
 
     /**
+     * UI展示相关的操作需要判断一下 Activity 是否已经 finish.
+     * <p>
+     * todo : 只有当 isActivityAlive 返回true时才可以执行与Activity相关的操作,
+     * 比如 弹出Dialog、Window、跳转Activity等操作.
+     *
+     * @return
+     */
+    public boolean isAttached() {
+        return mViewRef != null && mViewRef.get() != null;
+    }
+
+
+    /**
      * 返回 Context. 如果 Activity被销毁, 那么返回应用的Context.
      * <p>
      * 注意:
@@ -138,18 +151,6 @@ public abstract class Presenter<T extends MvpView> {
             return context.getString(rid);
         }
         return "";
-    }
-
-    /**
-     * UI展示相关的操作需要判断一下 Activity 是否已经 finish.
-     * <p>
-     * todo : 只有当 isActivityAlive 返回true时才可以执行与Activity相关的操作,
-     * 比如 弹出Dialog、Window、跳转Activity等操作.
-     *
-     * @return
-     */
-    protected boolean isAttached() {
-        return mViewRef != null && mViewRef.get() != null;
     }
 
 
