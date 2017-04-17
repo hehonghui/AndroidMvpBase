@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.simple.mvpbase.demo.detail.DetailActivity;
 
@@ -28,6 +29,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, DetailActivity.class));
             }
         });
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), "set text on jump : " + mJumpBtn, Toast.LENGTH_LONG).show();
+                mJumpBtn.setText("New Text On Jump");
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mJumpBtn = null ;
     }
 
     private static class MainHandler extends NoLeakHandler {

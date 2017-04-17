@@ -46,4 +46,14 @@ public class DetailActivity extends Activity implements DetailView {
         super.onDestroy();
         mPresenter.detach();
     }
+
+    @Override
+    public void test() {
+
+    }
+
+    @Override
+    public void test2() {
+
+    }
 }

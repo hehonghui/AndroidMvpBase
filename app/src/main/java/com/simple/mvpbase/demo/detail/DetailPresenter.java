@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.simple.mvp.Presenter;
+import com.simple.mvpbase.demo.BasePresenter;
 import com.simple.mvpbase.demo.ModelFactory;
 import com.simple.mvpbase.demo.R;
 import com.simple.mvpbase.demo.detail.model.DetailListener;
@@ -13,12 +13,11 @@ import com.simple.mvpbase.demo.detail.model.DetailModel;
 /**
  * Created by mrsimple on 27/12/16.
  */
-public class DetailPresenter extends Presenter<DetailView> {
+public class DetailPresenter extends BasePresenter<DetailView> {
 
     private Handler mHandler = new Handler(Looper.getMainLooper()) ;
 
     DetailModel mModel = ModelFactory.createDetailModel();
-
 
     public void fetchNewsDetail() {
         mModel.fetchDetail(new DetailListener() {
@@ -44,7 +43,7 @@ public class DetailPresenter extends Presenter<DetailView> {
             @Override
             public void run() {
                 // todo : 弹出dialog, 如果页面退出后才执行则会crash
-                showInfoDialog(R.string.fetched_news_comments);
+//                showInfoDialog(R.string.fetched_news_comments);
                 // 操作View
                 getView().showComments();
             }

@@ -3,12 +3,47 @@
   <component name="issues">
     <option name="index">
       <map>
+        <entry key="$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/BasePresenter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/DetailView1.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/DetailView2.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/HandlerFactory.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/MainActivity.java">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/MvpApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/NoLeakHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/NoLeakHandlerDelay.java">
           <value>
             <set />
           </value>
@@ -19,6 +54,26 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/detail/DetailPresenter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/detail/DetailView.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/detail/DetailView1.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/detail/DetailView2.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/com/simple/mvpbase/demo/detail/TestPresenter.java">
           <value>
             <set />
           </value>
@@ -79,6 +134,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/mvpbase/src/main/res/values/strings.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../NewsDog-Android-App-lite/newsDog/src/main/java/com/newsdog/mvp/ui/comments/presenter/CommentPresenter.java">
           <value>
             <set />
           </value>

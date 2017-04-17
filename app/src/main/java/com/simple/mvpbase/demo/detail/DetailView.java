@@ -1,11 +1,9 @@
 package com.simple.mvpbase.demo.detail;
 
-import com.simple.mvp.MvpView;
-
 /**
  * Created by mrsimple on 27/12/16.
  */
-public interface DetailView extends MvpView {
+public interface DetailView extends DetailView1, DetailView2 {
     void showNewsDetail();
     void showComments();
 }

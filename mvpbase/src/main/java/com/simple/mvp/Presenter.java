@@ -5,8 +5,6 @@ import android.content.Context;
 
 import java.lang.ref.WeakReference;
 
-import static com.simple.mvp.MvpViewHelper.createEmptyView;
-
 /**
  * Mvp Presenter 抽象类. 通过 弱引用持有 Context 和 View对象, 避免产生内存泄露。
  *
@@ -47,15 +45,15 @@ public abstract class Presenter<T extends MvpView> {
     /**
      * application context
      */
-    private static Context sAppContext;
+    protected static Context sAppContext;
     /**
      * context weak reference
      */
-    private WeakReference<Context> mContextRef;
+    protected WeakReference<Context> mContextRef;
     /**
      * mvp view weak reference
      */
-    private WeakReference<T> mViewRef;
+    protected WeakReference<T> mViewRef;
     /**
      * Mvp View created by dynamic Proxy
      */
@@ -138,7 +136,7 @@ public abstract class Presenter<T extends MvpView> {
      */
     protected Context getContext() {
         Context context = mContextRef != null ? mContextRef.get() : null;
-        if (context == null || !isAttached()) {
+        if (context == null ) {
             context = sAppContext;
         }
         return context;
@@ -157,21 +155,9 @@ public abstract class Presenter<T extends MvpView> {
      * @return Mvp View
      */
     protected T getView() {
-        T view = mViewRef != null ? mViewRef.get() : null;
-        if (view == null ) {
-            // create null mvp view
-            if (mNullView == null) {
-                mNullView = createEmptyView(this);
-            }
-            view = mNullView;
-        }
-        return view;
-    }
-
-
-    protected T getRealView() {
         return mViewRef != null ? mViewRef.get() : null;
     }
+
 
     protected String getString(int rid) {
         Context context = getContext();
