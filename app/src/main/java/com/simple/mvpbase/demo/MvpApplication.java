@@ -16,6 +16,6 @@ public class MvpApplication extends Application {
         super.onCreate();
         sContext = this ;
         // debug mode
-        NoLeakHandler.config(this, true);
+        NoLeakHandler.config(this, false);
     }
 }

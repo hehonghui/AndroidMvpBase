@@ -30,6 +30,9 @@ public class DetailPresenter extends BasePresenter<DetailView> {
 
 
     private void onFetchDetail() {
+        if (!isAttached()) {
+            return;
+        }
         // todo: 判断Activity是否已经销毁, 避免crash.
         if ( isAttached() ) {
             showInfoDialog(R.string.fetched_news_detail);
@@ -49,7 +52,6 @@ public class DetailPresenter extends BasePresenter<DetailView> {
             }
         }, 2000);
     }
-
 
     private void showInfoDialog(int msg) {
         new AlertDialog.Builder(getContext()).setMessage(msg).show();
